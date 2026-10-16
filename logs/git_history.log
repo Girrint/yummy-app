@@ -1,3 +1,6 @@
+* 83ccbef - 2014503 - Phan Van Nhat Truong (Fri Oct 16 15:27:48 2026 +0700): fix: restore build after linter demonstration
+* f8d20f6 - 2014503 - Phan Van Nhat Truong (Fri Oct 16 15:26:28 2026 +0700): test: demonstrate break the build
+* 8d0a645 - 2014503 - Phan Van Nhat Truong (Fri Oct 16 15:20:27 2026 +0700): chore: refresh local test and git history logs
 * 32c55c8 - 2014503 - Phan Van Nhat Truong (Fri Oct 16 15:14:40 2026 +0700): ci: upload HTML coverage report artifact
 * 48846f6 - 2014503 - Phan Van Nhat Truong (Fri Oct 16 15:14:30 2026 +0700): test: add promo and GPS mocking test cases
 * 8cfb863 - 2014503 - Phan Van Nhat Truong (Fri Oct 16 14:59:49 2026 +0700): ci: add lint and coverage quality gate
