@@ -1,0 +1,6 @@
+* 32c55c8 - 2014503 - Phan Van Nhat Truong (Fri Oct 16 15:14:40 2026 +0700): ci: upload HTML coverage report artifact
+* 48846f6 - 2014503 - Phan Van Nhat Truong (Fri Oct 16 15:14:30 2026 +0700): test: add promo and GPS mocking test cases
+* 8cfb863 - 2014503 - Phan Van Nhat Truong (Fri Oct 16 14:59:49 2026 +0700): ci: add lint and coverage quality gate
+* 31a1d04 - 2014503 - Phan Van Nhat Truong (Fri Oct 16 14:39:56 2026 +0700): ci: add workflow for lab branch
+* 8947040 - 2014503 - Phan Van Nhat Truong (Fri Oct 16 14:35:53 2026 +0700): ci: add GitHub Actions workflow
+* 8b08223 - Girrint (Fri Oct 16 14:26:42 2026 +0700): chore: initialize YummyApp Lab 7 project
