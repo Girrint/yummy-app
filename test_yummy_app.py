@@ -1,5 +1,7 @@
 import unittest
+from unittest.mock import patch
 
+import gps_service
 from yummy_app import YummyApp
 
 
@@ -38,6 +40,71 @@ class TestEasyLevel(unittest.TestCase):
         self.assertEqual(
             self.app.calculate_order_total(cart),
             0.0,
+        )
+
+
+class TestMediumLevel(unittest.TestCase):
+    def test_apply_giam10_promo_code_online(self):
+        app = YummyApp(network_status="online")
+
+        self.assertEqual(
+            app.apply_promo_code(100000, "GIAM10"),
+            90000,
+        )
+
+    def test_apply_promo_code_offline(self):
+        app = YummyApp(network_status="offline")
+
+        with self.assertRaises(ConnectionError):
+            app.apply_promo_code(100000, "GIAM10")
+
+    def test_apply_new_os_only_on_os_15(self):
+        app = YummyApp(os_version=15)
+
+        self.assertEqual(
+            app.apply_promo_code(100000, "NEW_OS_ONLY"),
+            80000,
+        )
+
+    def test_apply_new_os_only_on_os_14(self):
+        app = YummyApp(os_version=14)
+
+        with self.assertRaises(ValueError):
+            app.apply_promo_code(100000, "NEW_OS_ONLY")
+
+
+class TestHardLevel(unittest.TestCase):
+    @patch("yummy_app.gps_service.get_current_location")
+    def test_get_nearby_restaurants_at_known_location(self, mock_location):
+        mock_location.return_value = (10.0, 105.0)
+        app = YummyApp()
+
+        self.assertEqual(
+            app.get_nearby_restaurants(),
+            [
+                "Nha hang Pho Ly Quoc Su",
+                "Bun cha Huong Lien",
+            ],
+        )
+
+    @patch("yummy_app.gps_service.get_current_location")
+    def test_get_nearby_restaurants_at_unknown_location(self, mock_location):
+        mock_location.return_value = (20.0, 110.0)
+        app = YummyApp()
+
+        self.assertEqual(app.get_nearby_restaurants(), [])
+
+    @patch("yummy_app.gps_service.get_current_location")
+    def test_get_nearby_restaurants_when_gps_signal_lost(
+        self,
+        mock_location,
+    ):
+        mock_location.side_effect = gps_service.GPSSignalLostError
+        app = YummyApp()
+
+        self.assertEqual(
+            app.get_nearby_restaurants(),
+            "Khong the xac dinh vi tri.",
         )
 
 
